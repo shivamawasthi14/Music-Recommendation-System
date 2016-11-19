@@ -82,6 +82,14 @@ public class MainController {
 		return artistDAO.fetchLikedArtistsList(user);
 	}
 
+	public List<Song> getAllSongList() throws FileNotFoundException, IOException, SQLException {
+		return songDAO.fetchAllSongsList();
+	}
+
+	public List<Artist> getAllArtistList() throws SQLException, FileNotFoundException, IOException {
+		return artistDAO.fetchAllArtistsList();
+	}
+
 	public List<Song> getRecommendedSongList(User user) throws SQLException, FileNotFoundException, IOException {
 		List<Song> allSongs = songDAO.fetchAllSongsList();
 		List<Song> recommended = new ArrayList<>();
@@ -149,7 +157,7 @@ public class MainController {
 	public void updateLikeSong(Song song, User user) throws SQLException {
 		songDAO.updatelikeSong(song, user);
 	}
-	
+
 	public void updateLikeArtist(Artist artist, User user) throws SQLException {
 		artistDAO.updatelikeArtist(artist, user);
 	}
@@ -157,7 +165,7 @@ public class MainController {
 	public boolean isLiked(User user, Song song) throws SQLException {
 		return userDAO.isLiked(user, song);
 	}
-	
+
 	public boolean isLiked(User user, Artist artist) throws SQLException {
 		return userDAO.isLiked(user, artist);
 	}
