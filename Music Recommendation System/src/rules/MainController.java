@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import core.Artist;
 import core.Song;
 import core.User;
@@ -56,9 +58,12 @@ public class MainController {
 			System.out.println("User Logged: Opening Profile");
 			userProfileFrame = new UserProfileFrame(userLogged, this);
 			loginFrame.setVisible(false);
+			JOptionPane.showMessageDialog(userProfileFrame, "Browse freely! Logout when done!", "Welcome",
+					JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			System.out.println("Invalid Credentials");
-			// loginFrame.showInvalidUserMessage();
+			JOptionPane.showMessageDialog(loginFrame, "Wrong username or password!", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -119,7 +124,7 @@ public class MainController {
 		for (Pair<Song, Double> pair : deviations) {
 			recommended.add(pair.getKey());
 		}
-		return recommended.subList(0, 20);
+		return recommended.subList(0, 8);
 	}
 
 	public List<Artist> getRecommendedArtistList(User user) throws SQLException, FileNotFoundException, IOException {

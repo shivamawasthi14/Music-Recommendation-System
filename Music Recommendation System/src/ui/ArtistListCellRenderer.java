@@ -12,7 +12,6 @@ import javax.swing.ListCellRenderer;
 
 import core.Artist;
 
-
 public class ArtistListCellRenderer implements ListCellRenderer {
 	private JPanel panel;
 	private JLabel label;
@@ -22,7 +21,7 @@ public class ArtistListCellRenderer implements ListCellRenderer {
 		label = new JLabel();
 		ImageIcon music = new ImageIcon("images/b.png");
 		label.setIcon(music);
-		label.setBackground(new Color(174, 168, 211));
+		label.setBackground(Color.decode("#F9FBE7"));
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panel.add(label);
 		// list.add(panel);
@@ -38,7 +37,7 @@ public class ArtistListCellRenderer implements ListCellRenderer {
 
 		Artist artist = (Artist) value;
 		Color hover = new Color(246, 36, 89);
-		Color normal = new Color(155, 89, 182);
+		Color normal = Color.decode("#004D40");
 		label.setText(artistToString(artist)
 				+ "                                                                                                                                                              ");
 		label.setOpaque(true);
@@ -47,6 +46,7 @@ public class ArtistListCellRenderer implements ListCellRenderer {
 	}
 
 	private String artistToString(Artist artist) {
-		return "<html><pre> " + artist.getArtistName() + "<br> " + artist.getGenre() + "<br> " + artist.getAge();
+		return "<html><pre> " + " Artist Name: " + artist.getArtistName() + "<br> " + " Genre: " + artist.getGenre()
+				+ "<br> " + " Age: " + artist.getAge();
 	}
 }

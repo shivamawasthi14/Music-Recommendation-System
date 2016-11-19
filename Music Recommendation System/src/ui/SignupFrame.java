@@ -35,6 +35,7 @@ public class SignupFrame extends JFrame {
 	private void initSwingComponents() {
 		setTitle("Sign Up");
 		setBounds(100, 100, 800, 600);
+		setResizable(false);
 		setLayout(null);
 		
 		JLabel background = new JLabel(new ImageIcon("images/back.jpg"));
@@ -59,7 +60,6 @@ public class SignupFrame extends JFrame {
 				try {
 					mainController.createUser(usernamefield.getText(), password_field.getText());
 				} catch (SQLException e) {
-					// TODO show error dialog
 					e.printStackTrace();
 				}
 			}
@@ -72,8 +72,5 @@ public class SignupFrame extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
-	public static void main(String args[]) {
-		new SignupFrame();
-	}
+	
 }

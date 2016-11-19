@@ -74,32 +74,7 @@ public class SongDAO extends GenericDAO<Song> {
 		}
 		return song;
 	}
-/*
-	public List<Song> fetchLikedSongsList(User user) throws FileNotFoundException, IOException, SQLException {
-		List<Song> songs = new ArrayList<>();
 
-		Statement stmt = myConn.createStatement();
-
-		String SQL = "SELECT * FROM user_songs where user_id  = " + user.getUserId();
-		ResultSet rs = stmt.executeQuery(SQL);
-
-		int us, son;
-		while (rs.next()) {
-
-			us = rs.getInt(1);
-			son = rs.getInt(2);
-
-			String song_query = "SELECT * FROM song WHERE song_id = " + son;
-			ResultSet s = stmt.executeQuery(song_query);
-			if (s.next()) {
-				Song song = convertRowToT(s);
-				songs.add(song);
-			}
-		}
-
-		return songs;
-	}
-*/
 	/*
 	 * Add the song as liked by the user
 	 */

@@ -21,7 +21,7 @@ public class SongListCellRenderer implements ListCellRenderer {
 		label = new JLabel();
 		ImageIcon music = new ImageIcon("images/b.png");
 		label.setIcon(music);
-		label.setBackground(new Color(174, 168, 211));
+		label.setBackground(Color.decode("#E8F5E9"));
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panel.add(label);
 		// list.add(panel);
@@ -37,7 +37,7 @@ public class SongListCellRenderer implements ListCellRenderer {
 
 		Song song = (Song) value;
 		Color hover = new Color(246, 36, 89);
-		Color normal = new Color(155, 89, 182);
+		Color normal = Color.decode("#004D40");
 		label.setText(songToString(song)
 				+ "                                                                                                                                                                              ");
 		label.setOpaque(true);
@@ -46,6 +46,7 @@ public class SongListCellRenderer implements ListCellRenderer {
 	}
 
 	private String songToString(Song song) {
-		return "<html><pre> " + song.getTitle() + "<br> " + song.getArtistName() + "<br> " + song.getAlbum();
+		return "<html><pre> " + " Title: " + song.getTitle() + "<br> " + " Artist: " + song.getArtistName() + "<br> "
+				+ " Album: " + song.getAlbum();
 	}
 }

@@ -35,6 +35,7 @@ public class LoginFrame extends JFrame {
 		setTitle("Portal-Login");
         setBounds(100, 100, 800, 600);
         setLayout(null);
+        setResizable(false);
 
         JLabel background = new JLabel(new ImageIcon("images/back.jpg"));
         setContentPane(background);
@@ -74,7 +75,7 @@ public class LoginFrame extends JFrame {
 		});
         sign_up.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new SignupFrame(mainController);
+				mainController.register();
 				setVisible(false);
 			}
 		});
