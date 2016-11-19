@@ -27,7 +27,8 @@ public class UserProfileFrame extends JFrame {
 	private MainController mainController;
 	private User loggedUser;
 	private JTabbedPane tabbedPane;
-	private JPanel Mainpanel, Songpane, Artistpane;
+	private JPanel Mainpanel, recommendedSongPane, recommendedArtistPane, allSongPane, allArtistPane, likedSongPane,
+			likedArtistPane;
 	private JScrollPane songScrollPane, artistScrollPane;
 	private JList songList, artistList;
 	private JButton likeSongButton, refreshSongsButton, likeArtistButton, refreshArtistsButton;
@@ -99,7 +100,6 @@ public class UserProfileFrame extends JFrame {
 				try {
 					refreshArtistList();
 				} catch (SQLException | IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -141,20 +141,40 @@ public class UserProfileFrame extends JFrame {
 		tabbedPane.setBounds(20, 20, getWidth() - 50, getHeight() - 70);
 		tabbedPane.setBackground(new Color(154, 18, 179));
 
-		Songpane = new JPanel();
-		Songpane.setLayout(new BorderLayout());
-		Songpane.setBackground(new Color(102, 51, 153));
-		displaySongs(Songpane);
+		recommendedSongPane = new JPanel();
+		recommendedSongPane.setLayout(new BorderLayout());
+		recommendedSongPane.setBackground(new Color(102, 51, 153));
+		displaySongs(recommendedSongPane);
 
-		Artistpane = new JPanel();
-		Artistpane.setLayout(new BorderLayout());
-		Artistpane.setBackground(new Color(102, 51, 153));
-		displayArtists(Artistpane);
+		recommendedArtistPane = new JPanel();
+		recommendedArtistPane.setLayout(new BorderLayout());
+		recommendedArtistPane.setBackground(new Color(102, 51, 153));
+		displayArtists(recommendedArtistPane);
+
+		allSongPane = new JPanel();
+		allSongPane.setLayout(new BorderLayout());
+		allSongPane.setBackground(new Color(102, 51, 153));
+
+		allArtistPane = new JPanel();
+		allArtistPane.setLayout(new BorderLayout());
+		allArtistPane.setBackground(new Color(102, 51, 153));
+
+		likedSongPane = new JPanel();
+		likedSongPane.setLayout(new BorderLayout());
+		likedSongPane.setBackground(new Color(102, 51, 153));
+
+		likedArtistPane = new JPanel();
+		likedArtistPane.setLayout(new BorderLayout());
+		likedArtistPane.setBackground(new Color(102, 51, 153));
 
 		ImageIcon icon = new ImageIcon("images/a.png");
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPane.addTab("Songs", icon, Songpane, "Does nothing");
-		tabbedPane.addTab("Artists", icon, Artistpane, "Does nothing");
+		tabbedPane.addTab("Recommended Songs", icon, recommendedSongPane, "Does nothing");
+		tabbedPane.addTab("Recommended Artists", icon, recommendedArtistPane, "Does nothing");
+		tabbedPane.addTab("All Songs", icon, allSongPane, "Does nothing");
+		tabbedPane.addTab("All Artists", icon, allArtistPane, "Does nothing");
+		tabbedPane.addTab("Liked Songs", icon, likedSongPane, "Does nothing");
+		tabbedPane.addTab("Liked Artists", icon, likedArtistPane, "Does nothing");
 
 		Mainpanel.add(tabbedPane);
 		add(Mainpanel);

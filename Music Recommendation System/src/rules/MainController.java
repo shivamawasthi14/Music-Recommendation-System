@@ -37,7 +37,6 @@ public class MainController {
 	}
 
 	public MainController() throws FileNotFoundException, IOException, SQLException {
-		// TODO Auto-generated constructor stub
 		userDAO = new UserDAO();
 		artistDAO = new ArtistDAO();
 		songDAO = new SongDAO();
@@ -162,5 +161,4 @@ public class MainController {
 	public boolean isLiked(User user, Artist artist) throws SQLException {
 		return userDAO.isLiked(user, artist);
 	}
-
 }
