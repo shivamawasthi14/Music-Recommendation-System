@@ -13,6 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -32,10 +33,11 @@ public class UserProfileFrame extends JFrame {
 	private JScrollPane rSongScrollPane, rArtistScrollPane, lSongScrollPane, lArtistScrollPane, aSongScrollPane,
 			aArtistScrollPane;
 	private JList rSongList, rArtistList, lSongList, lArtistList, aSongList, aArtistList;
-	private JButton likeSongButton, refreshSongsButton, likeArtistButton, refreshArtistsButton;
+	private JButton logOut,likeSongButton, refreshSongsButton, likeArtistButton, refreshArtistsButton;
 	DefaultListModel rSongListModel, rArtistListModel, lSongListModel, lArtistListModel, aSongListModel,
 			aArtistListModel;
-
+	private JLabel name;
+	
 	public UserProfileFrame(User user, MainController mainController) {
 		this.mainController = mainController;
 		this.loggedUser = user;
@@ -141,7 +143,7 @@ public class UserProfileFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-
+		
 		likeSongButton = new JButton("Like");
 		likeSongButton.addActionListener(new ActionListener() {
 			@Override
@@ -239,7 +241,7 @@ public class UserProfileFrame extends JFrame {
 	}
 
 	private void initSwingComponents() {
-		setTitle("UserFrame");
+		setTitle("Welcome, "+loggedUser.getUserName());
 		setBounds(20, 20, 1300, 700);
 		setLayout(null);
 		setResizable(true);
@@ -248,7 +250,16 @@ public class UserProfileFrame extends JFrame {
 		Mainpanel.setBounds(0, 0, getWidth(), getHeight());
 		Mainpanel.setLayout(null);
 		Mainpanel.setBackground(new Color(154, 18, 179));
-
+		
+		logOut = new JButton("Logout");
+		logOut.setBounds(1150, 25, 100, 30);
+		logOut.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		tabbedPane = new JTabbedPane();
 		tabbedPane.setBounds(20, 20, getWidth() - 50, getHeight() - 70);
 		tabbedPane.setBackground(new Color(154, 18, 179));
@@ -291,7 +302,8 @@ public class UserProfileFrame extends JFrame {
 		tabbedPane.addTab("All Artists", icon, allArtistPane, "Does nothing");
 		tabbedPane.addTab("Liked Songs", icon, likedSongPane, "Does nothing");
 		tabbedPane.addTab("Liked Artists", icon, likedArtistPane, "Does nothing");
-
+		
+		Mainpanel.add(logOut);
 		Mainpanel.add(tabbedPane);
 		add(Mainpanel);
 		setVisible(true);

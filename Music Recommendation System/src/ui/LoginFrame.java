@@ -1,12 +1,12 @@
 package ui;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,29 +33,28 @@ public class LoginFrame extends JFrame {
 	}
 	private void initSwingComponents() {
 		setTitle("Portal-Login");
-        setBounds(100, 100, 400, 250);
+        setBounds(100, 100, 800, 600);
         setLayout(null);
-        panel = new JPanel();
-        panel.setLayout(null);
-        panel.setBounds(0, 0, 400, 250);
-        panel.setBackground(Color.yellow);
+
+        JLabel background = new JLabel(new ImageIcon("images/back.jpg"));
+        setContentPane(background);
         
         usernamelabel = new JLabel("Username : ");
-        usernamelabel.setBounds(20, 20, 100, 40);
+        usernamelabel.setBounds(160, 80, 100, 40);
         
         usernamefield = new JTextField();
-        usernamefield.setBounds(110, 20, 260, 40);
+        usernamefield.setBounds(280, 80, 260, 40);
         
         password_label = new JLabel("Password : ");
-        password_label.setBounds(20, 70, 100, 40);
+        password_label.setBounds(160, 130, 100, 40);
         
         password_field = new JPasswordField();
-        password_field.setBounds(110, 70, 260, 40);
+        password_field.setBounds(280, 130, 260, 40);
         
         login_button = new JButton("Login");
-        login_button.setBounds(80, 140, 100, 30);
+        login_button.setBounds(240, 200, 100, 30);
         sign_up = new JButton("Sign up");
-        sign_up.setBounds(200, 140, 100, 30);
+        sign_up.setBounds(400, 200, 100, 30);
         login_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -76,15 +75,15 @@ public class LoginFrame extends JFrame {
         sign_up.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new SignupFrame(mainController);
+				setVisible(false);
 			}
 		});
-        panel.add(usernamelabel);
-        panel.add(usernamefield);
-        panel.add(password_label);
-        panel.add(password_field);
-        panel.add(login_button);
-        panel.add(sign_up);
-        add(panel);
+        add(usernamelabel);
+        add(usernamefield);
+        add(password_label);
+        add(password_field);
+        add(login_button);
+        add(sign_up);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

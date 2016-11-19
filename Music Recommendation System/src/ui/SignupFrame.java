@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,27 +34,26 @@ public class SignupFrame extends JFrame {
 
 	private void initSwingComponents() {
 		setTitle("Sign Up");
-		setBounds(100, 100, 400, 250);
+		setBounds(100, 100, 800, 600);
 		setLayout(null);
-		panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBounds(0, 0, 400, 250);
-		panel.setBackground(Color.yellow);
+		
+		JLabel background = new JLabel(new ImageIcon("images/back.jpg"));
+        setContentPane(background);
 
 		usernamelabel = new JLabel("Username : ");
-		usernamelabel.setBounds(20, 20, 100, 40);
+		usernamelabel.setBounds(160, 80, 100, 40);
 
 		usernamefield = new JTextField();
-		usernamefield.setBounds(110, 20, 260, 40);
+		usernamefield.setBounds(280, 80, 260, 40);
 
 		password_label = new JLabel("Password : ");
-		password_label.setBounds(20, 70, 100, 40);
+		password_label.setBounds(160, 130, 100, 40);
 
 		password_field = new JPasswordField();
-		password_field.setBounds(110, 70, 260, 40);
+		password_field.setBounds(280, 130, 260, 40);
 
 		sign_up = new JButton("Sign up");
-		sign_up.setBounds(150, 140, 100, 30);
+		sign_up.setBounds(330, 200, 100, 30);
 		sign_up.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -64,12 +64,11 @@ public class SignupFrame extends JFrame {
 				}
 			}
 		});
-		panel.add(usernamelabel);
-		panel.add(usernamefield);
-		panel.add(password_label);
-		panel.add(password_field);
-		panel.add(sign_up);
-		add(panel);
+		add(usernamelabel);
+		add(usernamefield);
+		add(password_label);
+		add(password_field);
+		add(sign_up);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
