@@ -114,6 +114,16 @@ public class ArtistDAO extends GenericDAO<Artist> {
 		String SQL = "INSERT into user_artists VALUES(" + user.getUserId() + "," + artist.getArtistId() + ")";
 		stmt.executeUpdate(SQL);
 		System.out.println("Artist Liked: " + artist.getArtistName());
+		
+		stmt = myConn.createStatement();
+		SQL = "select likes from artist where artist_id = " + artist.getArtistId();
+		s = stmt.executeQuery(SQL);
+		if(s.next()){
+			int likes = s.getInt("likes") + 1;
+			String updateStmt = "update artist set likes = "+ likes + " where artist_id = " + artist.getArtistId();
+			stmt.executeUpdate(updateStmt);
+			System.out.println("Artist Likes Incremented: " + artist.getArtistName());
+		}
 	}
 
 }

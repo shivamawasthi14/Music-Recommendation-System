@@ -99,6 +99,16 @@ public class SongDAO extends GenericDAO<Song> {
 			System.out.println("Error: Artist corresponding to user not present");
 		}
 		System.out.println("Song liked: " + song.getTitle());
+		
+		stmt = myConn.createStatement();
+		SQL = "select likes from song where song_id = " + song.getSongId();
+		s = stmt.executeQuery(SQL);
+		if(s.next()){
+			int likes = s.getInt("likes") + 1;
+			String updateStmt = "update song set likes = "+ likes + " where song_id = " + song.getSongId();
+			stmt.executeUpdate(updateStmt);
+			System.out.println("Song Likes Incremented: " + song.getTitle());
+		}
 	}
 
 	public List<Song> fetchAllSongsList() throws SQLException {

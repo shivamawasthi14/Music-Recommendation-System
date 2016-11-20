@@ -19,10 +19,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import core.Artist;
 import core.Song;
 import core.User;
+import dao.UserDAO;
 import rules.MainController;
 
 public class UserProfileFrame extends JFrame {
@@ -110,6 +113,7 @@ public class UserProfileFrame extends JFrame {
 		rArtistScrollPane = new JScrollPane();
 		rArtistListModel = new DefaultListModel();
 		rArtistList = new JList(rArtistListModel);
+
 		rArtistList.setCellRenderer(new ArtistListCellRenderer(rArtistList));
 		rArtistScrollPane.setViewportView(rArtistList);
 
@@ -299,7 +303,9 @@ public class UserProfileFrame extends JFrame {
 	}
 
 	private void initSwingComponents() {
-		setTitle("Welcome, " + loggedUser.getUserName());
+		setTitle(
+				"                                                                                                                                                                                            "
+						+ "Logged User: " + loggedUser.getUserName().toUpperCase());
 		setBounds(20, 20, 1300, 700);
 		setLayout(null);
 		setResizable(false);
@@ -315,7 +321,8 @@ public class UserProfileFrame extends JFrame {
 		logOut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				mainController.openLogin();
+				setVisible(false);
 			}
 		});
 
@@ -356,13 +363,26 @@ public class UserProfileFrame extends JFrame {
 
 		ImageIcon icon = new ImageIcon("images/a.png");
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPane.addTab("Recommended Songs", icon, recommendedSongPane, "Does nothing");
-		tabbedPane.addTab("Recommended Artists", icon, recommendedArtistPane, "Does nothing");
-		tabbedPane.addTab("All Songs", icon, allSongPane, "Does nothing");
-		tabbedPane.addTab("All Artists", icon, allArtistPane, "Does nothing");
-		tabbedPane.addTab("Liked Songs", icon, likedSongPane, "Does nothing");
-		tabbedPane.addTab("Liked Artists", icon, likedArtistPane, "Does nothing");
-
+		tabbedPane.addTab("Recommended Songs", icon, recommendedSongPane,
+				"Default : Shows Top Songs,Else Recommended Songs based on User Preferences");
+		tabbedPane.addTab("Recommended Artists", icon, recommendedArtistPane,
+				"Default : Shows Top Artists,Else Recommended Artists based on User Preferences");
+		tabbedPane.addTab("All Songs", icon, allSongPane, "Shows All Songs in Knowledge Base");
+		tabbedPane.addTab("All Artists", icon, allArtistPane, "Shows All Artists in Knowledge Base");
+		tabbedPane.addTab("Liked Songs", icon, likedSongPane, "Shows All Liked Songs (Facts Base)");
+		tabbedPane.addTab("Liked Artists", icon, likedArtistPane, "Shows All Liked Artists (Facts Base)");
+		ChangeListener changeListener = new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent changeEvent) {
+				// JTabbedPane source = (JTabbedPane) changeEvent.getSource();
+				try {
+					refresh();
+				} catch (SQLException | IOException e) {
+					System.out.println("Error during Refresh");
+				}
+			}
+		};
+		tabbedPane.addChangeListener(changeListener);
 		Mainpanel.add(logOut);
 		Mainpanel.add(tabbedPane);
 		add(Mainpanel);
@@ -396,6 +416,13 @@ public class UserProfileFrame extends JFrame {
 
 	public void likeArtist(Object object) throws SQLException {
 		mainController.updateLikeArtist((Artist) object, loggedUser);
+	}
+
+	public void refresh() throws FileNotFoundException, SQLException, IOException {
+		refreshLikedArtistList();
+		refreshLikedSongList();
+		refreshRecommendedArtistList();
+		refreshRecommendedSongList();
 	}
 
 	public static void main(String args[]) {

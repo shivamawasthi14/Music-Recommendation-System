@@ -32,7 +32,7 @@ public class LoginFrame extends JFrame {
 		initSwingComponents();
 	}
 	private void initSwingComponents() {
-		setTitle("Portal-Login");
+		setTitle("User Login");
         setBounds(100, 100, 800, 600);
         setLayout(null);
         setResizable(false);
@@ -87,6 +87,7 @@ public class LoginFrame extends JFrame {
         add(sign_up);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getRootPane().setDefaultButton(login_button);
 	}
 	public static void main(String args[]) {
 		new LoginFrame();
